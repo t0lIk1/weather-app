@@ -1,0 +1,65 @@
+body{
+  font-family: 'Oxygen', sans-serif;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.hero {
+  border-radius: 15px;
+  background: #fff;
+  height: 520px;
+  width: 620px;
+}
+.hero div {
+}
+.hero__weather {
+}
+.hero__basic{
+  position: relative;
+  height: 250px;
+  color: #fff;
+  border-radius: 15px 15px 0 0;
+  padding: 15px 15px;
+  background: linear-gradient(45deg, #330867, #30cfd0); 
+
+}
+.hero__name-town {
+  font-size: 50px;
+}
+.hero__weather-name{
+  font-size: 20px;
+}
+.hero__temp {
+  position: absolute;
+  bottom: 15px;
+  left: 15px;
+  font-size: 90px;
+}
+.hero__icon {
+}
+.hero__weather-addition{
+  padding: 15px 15px; 
+  background: #fff;
+}
+.hero__list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+}
+.hero__item {
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.feauters{
+  position: absolute;
+  right: 15px;  
+}
+.option-ico{
+  width: 32px;
+  height: 32px;
+}
