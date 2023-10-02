@@ -57,7 +57,11 @@ body{
 
 .feauters{
   position: absolute;
-  right: 15px;  
+  top: 50px;
+
+  right: 40px;  
+  width: 150px;
+  height: 150px;
 }
 .option-ico{
   width: 32px;
