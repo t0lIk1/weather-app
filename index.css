@@ -76,6 +76,9 @@ body{
   z-index: 1000;
   transition: 0.3s ease-in-out;
 }
+.popup .active{
+  right: 0;
+}
 .popup-form {
 }
 .popup-input {
