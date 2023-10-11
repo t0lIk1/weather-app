@@ -1,4 +1,36 @@
-const link = `https://api.openweathermap.org/data/3.0/onecall?lat=33.44&lon=-94.04&units=metric&appid=ed846c16bc89264f21455235cec96624`;
+
+if (navigator.geolocation) {
+  navigator.geolocation.getCurrentPosition(function(position) {
+    let lat = position.coords.latitude;
+    let lon = position.coords.longitude;
+    const link = `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&units=metric&appid=ed846c16bc89264f21455235cec96624`;
+    const linkData = async () => {
+      const res = await fetch(link);
+      const data = await res.json();
+      let {timezone, current: { temp, pressure, sunrise, sunset, humidity, wind_speed:windSpeed, wind_deg:windDeg, uvi, clouds, weather: { 0:{ main, icon } }  }} = data;
+      storage = {
+        ...storage,
+        timezone,
+        temp,
+        pressure,
+        sunrise,
+        sunset,
+        main,
+        icon,
+        windSpeed,
+        windDeg,
+        uvi,
+        clouds, 
+        humidity,
+      };
+      changeEl();
+    }
+    linkData();
+  });
+}
+
+
+
 let storage = {
     timezone: "",
     current: {
@@ -14,28 +46,6 @@ let storage = {
       weather: { 0:{ main:"sunny",icon: "icons8-partly-cloudy-day-100.png" } } ,
     },
 };
-
-const linkData = async () => {
-  const res = await fetch(link);
-  const data = await res.json();
-  let {timezone, current: { temp, pressure, sunrise, sunset, humidity, wind_speed:windSpeed, wind_deg:windDeg, uvi, clouds, weather: { 0:{ main, icon } }  }} = data;
-  storage = {
-    ...storage,
-    timezone,
-    temp,
-    pressure,
-    sunrise,
-    sunset,
-    main,
-    icon,
-    windSpeed,
-    windDeg,
-    uvi,
-    clouds, 
-    humidity,
-  };
-  modificateEl();
-}
 let weatherIco = (main) =>{
     const value = main.toLowerCase();
     switch(value){
@@ -83,7 +93,7 @@ function tratslateDeg(windDeg){
   significance = Math.round(windDeg / 45);
   return direction[significance];
 }
-let modificateEl = (e) =>{
+let changeEl = (e) =>{
 // Обновляем название города
 let town = document.getElementById("timezone");
 town.textContent = storage.timezone;
@@ -133,6 +143,5 @@ Sunrise.innerHTML = translateTime(storage.sunrise);
 let Sunset = document.getElementById("sunset");
 Sunset.innerHTML = translateTime(storage.sunset);
 }
-linkData();
 
 
