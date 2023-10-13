@@ -1,44 +1,51 @@
 let loadScreen = document.querySelector(".loadbg")
 let errorScrean = document.querySelector(".errorbg")
 loadScreen.style.display = "flex";
-if (navigator.geolocation) {
-  navigator.geolocation.getCurrentPosition(function(position) {
-    let lat = position.coords.latitude;
-    let lon = position.coords.longitude;
-    const link = `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&units=metric&appid=ed846c16bc89264f21455235cec96624`;
-    const linkData = async () => {
+
+  navigator.geolocation.watchPosition(position => {
+    const { latitude, longitude } = position.coords
+    coords(latitude, longitude);
+  },
+  error => {
+    let latitude = 33.44;
+    let longitude = 94.04; 
+    coords(latitude, longitude);
+  }
+  );
+  function coords(latitude, longitude){
+      const link = `https://api.openweathermap.org/data/3.0/onecall?lat=${latitude}&lon=${longitude}&units=metric&appid=ed846c16bc89264f21455235cec96624`;
+      const linkData = async () => {
       try{
-      const res = await fetch(link);
-      const data = await res.json();
-      let {timezone, current: { temp, pressure, sunrise, sunset, humidity, wind_speed:windSpeed, wind_deg:windDeg, uvi, clouds, weather: { 0:{ main, icon } }  }} = data;
-      storage = {
-        ...storage,
-        timezone,
-        temp,
-        pressure,
-        sunrise,
-        sunset,
-        main,
-        icon,
-        windSpeed,
-        windDeg,
-        uvi,
-        clouds, 
-        humidity,
-      };
-      changeEl();
-    }
-    catch{
-      errorScrean.classList.toggle('active');
-    }
-    }
-    linkData()
-  .then(() => {
-    loadScreen.style.display = "none";
-  });
-  });
-  
-} 
+        const res = await fetch(link);
+        const data = await res.json();
+        let {timezone, current: { temp, pressure, sunrise, sunset, humidity, wind_speed:windSpeed, wind_deg:windDeg, uvi, clouds, weather: { 0:{ main, icon } }  }} = data;
+        storage = {
+          ...storage,
+          timezone,
+          temp,
+          pressure,
+          sunrise,
+          sunset,
+          main,
+          icon,
+          windSpeed,
+          windDeg,
+          uvi,
+          clouds, 
+          humidity,
+        };
+        changeEl();
+      }
+      catch{
+        errorScrean.classList.toggle('active');
+      }
+      }
+      linkData()
+      .then(() => {
+        loadScreen.style.display = "none";
+      });
+  };
+
 let storage = {
     timezone: "",
     current: {
@@ -129,8 +136,7 @@ windDirection.innerHTML = tratslateDeg(storage.windDeg);
 // Обновляем порывы ветра
 let uviIndex = document.getElementById("uvi");
 uviIndex.innerHTML = storage.uvi;
-
-
+ 
 // Обновляем облачность
 let Clouds = document.getElementById("clouds");
 Clouds.innerHTML = storage.clouds + '%';
