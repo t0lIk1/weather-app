@@ -11,28 +11,44 @@
   <title>weather</title>
 </head>
 <body>
+  <div class="loadbg">
+    <div class="load">
+    </div>
+  </div>
+  <div class="errorbg">
+    <div class="error">
+    </div>
+    <span class="error-massage">error</span>
+  
+  </div>
   <section class="hero">
-    <div class="hero__weather">
-      <div class="hero__basic">
-        <p class="hero__name-town" id="timezone"></p>
-        <img class="feauters" id="weather-icon" src=""></img>
-        <p class="hero__weather-name" id="weather-name"></p>
-        <p class="hero__temp" id="temp">&deg</p>
+    <div class="ico">
+      <div class="hero__weather">
+        <div class="hero__basic">
+          <p class="hero__name-town" id="timezone"></p>
+          <img class="feauters" id="weather-icon" src=""></img>
+          <p class="hero__weather-name" id="weather-name"></p>
+          <p class="hero__temp" id="temp"></p>
+        </div>
+        <div class="hero__weather-addition">
+          <ul class="hero__list">
+          <li class="hero__item" ><img class="option-ico"  src="./img/option icon/icons8-скорость-ветра-43-47-64.png"><p id="windSpeed"></p></img></li>
+          <li class="hero__item" ><img class="option-ico"  src="./img/option icon/icons8-wind-direction-64.png"><p id="winddirection"></p></img></li>
+          <li class="hero__item" ><img class="option-ico"  src="./img/option icon/icons8-uv-index-64.png"><p id="uvi"></p></img></li>
+          <li class="hero__item" ><img class="option-ico"  src="./img/option icon/icons8-облако-64.png"><p id="clouds"></p></img></li>
+          <li class="hero__item" ><img class="option-ico"  src="./img/option icon/icons8-влажность-64.png"><p id="humidity"></p></img></li>
+          <li class="hero__item" ><img class="option-ico"  src="./img/option icon/icons8-барометр-64.png"><p id="pressure"></p></img></li>
+          <li class="hero__item" ><img class="option-ico"  src="./img/option icon/icons8-восход-64.png"><p id="sunrise"></p></img></li>
+          <li class="hero__item" ><img class="option-ico"  src="./img/option icon/icons8-закат-солнца-64.png"><p id="sunset"></p></img></li>
+          </ul>
+          
+        </div>
+        
       </div>
-      <div class="hero__weather-addition">
-        <ul class="hero__list">
-        <li class="hero__item" ><img class="option-ico"  src="./img/option icon/icons8-скорость-ветра-43-47-64.png"><p id="windSpeed"></p></img></li>
-        <li class="hero__item" ><img class="option-ico"  src="./img/option icon/icons8-wind-direction-64.png"><p id="winddirection"></p></img></li>
-        <li class="hero__item" ><img class="option-ico"  src="./img/option icon/icons8-uv-index-64.png"><p id="uvi"></p></img></li>
-        <li class="hero__item" ><img class="option-ico"  src="./img/option icon/icons8-облако-64.png"><p id="clouds"></p></img></li>
-        <li class="hero__item" ><img class="option-ico"  src="./img/option icon/icons8-влажность-64.png"><p id="humidity"></p></img></li>
-        <li class="hero__item" ><img class="option-ico"  src="./img/option icon/icons8-барометр-64.png"><p id="pressure"></p></img></li>
-        <li class="hero__item" ><img class="option-ico"  src="./img/option icon/icons8-восход-64.png"><p id="sunrise"></p></img></li>
-        <li class="hero__item" ><img class="option-ico"  src="./img/option icon/icons8-закат-солнца-64.png"><p id="sunset"></p></img></li>
-        </ul>
-      </div>
+      
     </div>
   </section>
+  
   <script src="./script/script.js">
     
   </script>

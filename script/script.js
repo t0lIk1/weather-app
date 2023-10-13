@@ -1,10 +1,12 @@
-
+let loadScrean = document.querySelector(".loadbg")
+let errorScrean = document.querySelector(".errorbg")
 if (navigator.geolocation) {
   navigator.geolocation.getCurrentPosition(function(position) {
     let lat = position.coords.latitude;
     let lon = position.coords.longitude;
     const link = `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&units=metric&appid=ed846c16bc89264f21455235cec96624`;
     const linkData = async () => {
+      try{
       const res = await fetch(link);
       const data = await res.json();
       let {timezone, current: { temp, pressure, sunrise, sunset, humidity, wind_speed:windSpeed, wind_deg:windDeg, uvi, clouds, weather: { 0:{ main, icon } }  }} = data;
@@ -23,14 +25,16 @@ if (navigator.geolocation) {
         clouds, 
         humidity,
       };
+      
       changeEl();
+    }
+    catch{
+
+    }
     }
     linkData();
   });
-}
-
-
-
+} 
 let storage = {
     timezone: "",
     current: {

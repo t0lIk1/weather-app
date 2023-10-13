@@ -6,20 +6,20 @@ body{
   justify-content: center;
 }
 .hero {
-  border-radius: 16px;
   background: #fff;
   height: 520px;
   width: 620px;
+  position: relative;
 }
 
 .hero__weather {
   z-index: 100;
 }
 .hero__basic{
+  display: block;
   position: relative;
   height: 250px;
   color: #fff;
-  border-radius: 15px 15px 0 0;
   padding: 15px 15px;
   background: linear-gradient(45deg, #330867, #30cfd0); 
 
@@ -64,4 +64,97 @@ body{
 .option-ico{
   width: 32px;
   height: 32px;
+}
+
+.ico{
+  display: block;
+  border-radius: 15px 15px 15px 15px;
+}
+
+
+.load{
+  -moz-user-select: none; -khtml-user-select: none; user-select: none;
+  animation: load 2s 0s infinite  ;
+  border: 19px solid #c5c5c5;
+  width: 200px;
+  height: 200px;
+  border-radius: 100%;  
+  border-top: 19px solid #000;
+  position: absolute;
+  z-index: 1000;
+  }
+.loadbg {
+display: none;
+background: #fff;
+width: 100%;
+height: 100%;
+position: absolute;
+
+align-items: center;
+justify-content: center;
+z-index: 100;
+}
+.loadbg.active{
+  display: flex;
+}
+
+@keyframes load{
+    from{
+        transform: rotate(0deg);
+    }
+    to{
+      transform: rotate(360deg);
+    }
+}
+
+.errorbg{
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 10000000;
+  background: #fff;
+}
+.errorbg.active{
+  display: flex;
+}
+.error{
+  border-radius: 100%;
+  outline: 10px solid #000000;
+  background: red;
+  width: 200px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.error::after{
+  content: "";
+  position: absolute;
+  height: 180px;
+  width: 30px;
+  background: #fff;
+  border-radius: 15px;
+  transform: rotate(40deg);
+}
+
+.error::before{
+content: "";
+position: absolute;
+height: 180px;
+width: 30px;
+background: #fff;
+border-radius: 15px;
+transform: rotate(-40deg);
+}
+
+.error-massage{
+  text-transform: uppercase;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: 800;
+  font-size: 50px;
 }
