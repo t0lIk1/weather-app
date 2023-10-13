@@ -1,5 +1,6 @@
-let loadScrean = document.querySelector(".loadbg")
+let loadScreen = document.querySelector(".loadbg")
 let errorScrean = document.querySelector(".errorbg")
+loadScreen.style.display = "flex";
 if (navigator.geolocation) {
   navigator.geolocation.getCurrentPosition(function(position) {
     let lat = position.coords.latitude;
@@ -25,15 +26,18 @@ if (navigator.geolocation) {
         clouds, 
         humidity,
       };
-      
       changeEl();
     }
     catch{
-
+      errorScrean.classList.toggle('active');
     }
     }
-    linkData();
+    linkData()
+  .then(() => {
+    loadScreen.style.display = "none";
   });
+  });
+  
 } 
 let storage = {
     timezone: "",
