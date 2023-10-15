@@ -1,7 +1,14 @@
 let loadScreen = document.querySelector(".loadbg")
+let hero = document.querySelector(".hero")
 let errorScrean = document.querySelector(".errorbg")
+let magnifier = document.querySelector(".magnifier-glass")
+let form = document.querySelector(".weather-form")
 loadScreen.style.display = "flex";
-
+magnifier.addEventListener("click", (e) => {
+  magnifier.style.display = "none";
+  form.classList.toggle('active');
+  hero.classList.toggle('active');
+});
   navigator.geolocation.watchPosition(position => {
     const { latitude, longitude } = position.coords
     coords(latitude, longitude);

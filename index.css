@@ -6,10 +6,15 @@ body{
   justify-content: center;
 }
 .hero {
-  background: #fff;
+    background: #fff;
   height: 520px;
   width: 620px;
   position: relative;
+  
+}
+.hero.active{
+  transition: 0.3s filter ease-in-out;
+  filter: blur(10px);
 }
 
 .hero__weather {
@@ -93,7 +98,58 @@ z-index: 100;
 .loadbg.active{
   display: flex;
 }
+.magnifier-glass{
+  cursor: pointer;
+  position: absolute;
+  top: 23px;
+  right: 15px;
+  width: 32px;
+  height: 32px;
+}
+.weather-form {
+  animation: top 0.7s 0s ;
+  display: none;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  z-index: 10000;
+  position: absolute;
+  flex-direction: row;
+}
+.weather-form.active{
+  display: flex;
+  top: 250px;
+}
+.weather-form__input {
+  font-size: 25px;
+  padding: 15px 5px 15px 15px;
+  width: 400px;
+  height: 50px;
+  border: 2px solid #656565;
+  border-radius: 10px 0 0 10px;
+}
+.weather-form__button {
+  border-radius: 0 10px 10px 0 ;
+  height: 50px;
+  width: 80px;
+  color: #fff;
+  background: #32b307;
+  transition: 0.3s ease-in-out;
+}
+.weather-form__button:hover{
+  background: #32a63a;
+}
 
+@keyframes top {
+  from{
+    opacity: 0;
+    top:100px;
+  }
+  to{
+    opacity: 10;
+    top:250px;
+  }
+}
 @keyframes load{
     from{
         transform: rotate(0deg);
