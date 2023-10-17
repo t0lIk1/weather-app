@@ -6,14 +6,13 @@ body{
   justify-content: center;
 }
 .hero {
-    background: #fff;
+  background: #fff;
   height: 520px;
   width: 620px;
   position: relative;
-  
+  transition: 0.3s  ease-in-out;
 }
 .hero.active{
-  transition: 0.3s filter ease-in-out;
   filter: blur(10px);
 }
 
@@ -107,11 +106,11 @@ z-index: 100;
   height: 32px;
 }
 .weather-form {
-  animation: top 0.7s 0s ;
   display: none;
   width: 100%;
   height: 100%;
   justify-content: center;
+  top: 0;
   z-index: 10000;
   position: absolute;
   flex-direction: row;
@@ -119,6 +118,8 @@ z-index: 100;
 .weather-form.active{
   display: flex;
   top: 250px;
+  animation: top 0.7s 0s ;
+  
 }
 .weather-form__input {
   font-size: 25px;

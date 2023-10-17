@@ -3,7 +3,20 @@ let hero = document.querySelector(".hero")
 let errorScrean = document.querySelector(".errorbg")
 let magnifier = document.querySelector(".magnifier-glass")
 let form = document.querySelector(".weather-form")
+let search = document.querySelector(".weather-form__button");
 loadScreen.style.display = "flex";
+
+
+function submitForm(event){
+  const town = document.querySelector(".weather-form__input").value;
+  event.preventDefault();
+  console.log(town);
+  magnifier.style.display = "block";
+  form.classList.toggle('active');
+  hero.classList.toggle('active');
+
+}
+search.addEventListener("click", submitForm);
 magnifier.addEventListener("click", (e) => {
   magnifier.style.display = "none";
   form.classList.toggle('active');
