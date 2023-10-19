@@ -5,6 +5,7 @@ let magnifier = document.querySelector(".magnifier-glass")
 let form = document.querySelector(".weather-form")
 let search = document.querySelector(".weather-form__button");
 let town = "Shanghai";
+let isCoordsObtained = false; // Флаг для отслеживания состояния получения координат
 let storage = {
   timezone: "",
   current: {
@@ -45,16 +46,20 @@ magnifier.addEventListener("click", (e) => {
 });
 
 navigator.geolocation.watchPosition(position => {
-    const { latitude, longitude } = position.coords
-    coords(latitude, longitude);
+  if (!isCoordsObtained) {
+  const { latitude, longitude } = position.coords;
+  coords(latitude, longitude);
+  isCoordsObtained = true; // Устанавливаем флаг в значение true после первого успешного получения координат
+}
+
   },
   error => {
-    let latitude = 33.44;
-    let longitude = 94.04; 
-    coords(latitude, longitude);
-  }
+    translateTown();  
+  },
+
 );
 function coords(latitude, longitude){
+  
       const link = `https://api.openweathermap.org/data/3.0/onecall?lat=${latitude}&lon=${longitude}&units=metric&appid=ed846c16bc89264f21455235cec96624`;
       const linkData = async () => {
       try{
@@ -204,6 +209,4 @@ Sunrise.innerHTML = translateTime(storage.sunrise);
 let Sunset = document.getElementById("sunset");
 Sunset.innerHTML = translateTime(storage.sunset);
 }
-translateTown();
-console.log(coordsTown.lat);
 
