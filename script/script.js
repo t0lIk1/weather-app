@@ -4,17 +4,38 @@ let errorScrean = document.querySelector(".errorbg")
 let magnifier = document.querySelector(".magnifier-glass")
 let form = document.querySelector(".weather-form")
 let search = document.querySelector(".weather-form__button");
+let town = "Shanghai";
+let storage = {
+  timezone: "",
+  current: {
+    temp: 299.82,
+    windSpeed:2.36,
+    windDeg: 32,
+    uvi: 2,
+    pressure: 1024,
+    clouds: 30,
+    sunrise: 3500,
+    sunset: 3500,
+    humidity: 35,
+    weather: { 0:{ main:"sunny",icon: "icons8-partly-cloudy-day-100.png" } } ,
+  },
+};
+const coordsTown = {
+  0:{
+    lat: 15,
+    lon: 10,
+  }
+};
 loadScreen.style.display = "flex";
 
 
 function submitForm(event){
-  const town = document.querySelector(".weather-form__input").value;
+  town = document.querySelector(".weather-form__input").value;
   event.preventDefault();
-  console.log(town);
   magnifier.style.display = "block";
   form.classList.toggle('active');
-  hero.classList.toggle('active');
-
+  hero.classList.toggle('active');      
+  translateTown(town);
 }
 search.addEventListener("click", submitForm);
 magnifier.addEventListener("click", (e) => {
@@ -22,7 +43,8 @@ magnifier.addEventListener("click", (e) => {
   form.classList.toggle('active');
   hero.classList.toggle('active');
 });
-  navigator.geolocation.watchPosition(position => {
+
+navigator.geolocation.watchPosition(position => {
     const { latitude, longitude } = position.coords
     coords(latitude, longitude);
   },
@@ -31,8 +53,8 @@ magnifier.addEventListener("click", (e) => {
     let longitude = 94.04; 
     coords(latitude, longitude);
   }
-  );
-  function coords(latitude, longitude){
+);
+function coords(latitude, longitude){
       const link = `https://api.openweathermap.org/data/3.0/onecall?lat=${latitude}&lon=${longitude}&units=metric&appid=ed846c16bc89264f21455235cec96624`;
       const linkData = async () => {
       try{
@@ -64,23 +86,28 @@ magnifier.addEventListener("click", (e) => {
       .then(() => {
         loadScreen.style.display = "none";
       });
-  };
-
-let storage = {
-    timezone: "",
-    current: {
-      temp: 299.82,
-      windSpeed:2.36,
-      windDeg: 32,
-      uvi: 2,
-      pressure: 1024,
-      clouds: 30,
-      sunrise: 3500,
-      sunset: 3500,
-      humidity: 35,
-      weather: { 0:{ main:"sunny",icon: "icons8-partly-cloudy-day-100.png" } } ,
-    },
+};  
+let translateTown = async () => {
+  let link = `http://api.openweathermap.org/geo/1.0/direct?q=${town}&appid=ed846c16bc89264f21455235cec96624`
+  console.log(link);  
+  const linkData = async () => {
+    try{
+      const res = await fetch(link);
+      const data = await res.json();   
+      let { 0:{lat, lon} } = data;
+      coords(lat , lon);
+      coordsTown = {
+        ...coordsTown,
+        lat,
+        lon,
+      };
+    }
+    catch{
+    }
+  }
+  linkData();
 };
+
 let weatherIco = (main) =>{
     const value = main.toLowerCase();
     switch(value){
@@ -177,5 +204,6 @@ Sunrise.innerHTML = translateTime(storage.sunrise);
 let Sunset = document.getElementById("sunset");
 Sunset.innerHTML = translateTime(storage.sunset);
 }
-
+translateTown();
+console.log(coordsTown.lat);
 
