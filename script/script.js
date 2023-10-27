@@ -156,8 +156,8 @@ function tratslateDeg(windDeg){
   significance = Math.round(windDeg / 45);
   return direction[significance];
 } 
-let changeEl = (e) =>{
-// Обновляем название города
+let changeEl  = (e) =>{
+// Обновляем название города  
 let town = document.getElementById("timezone");
 town.textContent = storage.timezone;
 
