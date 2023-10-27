@@ -5,6 +5,7 @@ let magnifier = document.querySelector(".magnifier-glass")
 let form = document.querySelector(".weather-form")
 let search = document.querySelector(".weather-form__button");
 let town = "Shanghai";
+let town1;
 let isCoordsObtained = false; // Флаг для отслеживания состояния получения координат
 let storage = {
   timezone: "",
@@ -25,25 +26,20 @@ const coordsTown = {
   0:{
     lat: 15,
     lon: 10,
+    local_names:{
+      en: "Moscow",
+    }
   }
 };
 loadScreen.style.display = "flex";
 
-
 function submitForm(event){
   town = document.querySelector(".weather-form__input").value;
   event.preventDefault();
-  magnifier.style.display = "block";
-  form.classList.toggle('active');
-  hero.classList.toggle('active');      
   translateTown(town);
 }
 search.addEventListener("click", submitForm);
-magnifier.addEventListener("click", (e) => {
-  magnifier.style.display = "none";
-  form.classList.toggle('active');
-  hero.classList.toggle('active');
-});
+
 
 navigator.geolocation.watchPosition(position => {
   if (!isCoordsObtained) {
@@ -59,8 +55,8 @@ navigator.geolocation.watchPosition(position => {
 
 );
 function coords(latitude, longitude){
-  
       const link = `https://api.openweathermap.org/data/3.0/onecall?lat=${latitude}&lon=${longitude}&units=metric&appid=ed846c16bc89264f21455235cec96624`;
+      console.log(link);
       const linkData = async () => {
       try{
         const res = await fetch(link);
@@ -99,12 +95,13 @@ let translateTown = async () => {
     try{
       const res = await fetch(link);
       const data = await res.json();   
-      let { 0:{lat, lon} } = data;
+      let { 0:{lat, lon, local_names:{en}} } = data;
       coords(lat , lon);
       coordsTown = {
         ...coordsTown,
         lat,
         lon,
+        en,
       };
     }
     catch{
@@ -112,7 +109,6 @@ let translateTown = async () => {
   }
   linkData();
 };
-
 let weatherIco = (main) =>{
     const value = main.toLowerCase();
     switch(value){
@@ -159,7 +155,7 @@ function tratslateDeg(windDeg){
     }
   significance = Math.round(windDeg / 45);
   return direction[significance];
-}
+} 
 let changeEl = (e) =>{
 // Обновляем название города
 let town = document.getElementById("timezone");
@@ -188,7 +184,7 @@ windDirection.innerHTML = tratslateDeg(storage.windDeg);
 // Обновляем порывы ветра
 let uviIndex = document.getElementById("uvi");
 uviIndex.innerHTML = storage.uvi;
- 
+
 // Обновляем облачность
 let Clouds = document.getElementById("clouds");
 Clouds.innerHTML = storage.clouds + '%';

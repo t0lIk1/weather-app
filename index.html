@@ -22,19 +22,20 @@
     <span class="error-еу">error</span>
   
   </div>
-  <form class="weather-form"  action="http://127.0.0.1:5500/index.html?town=">
-    <input type="text" class="weather-form__input" name="town" placeholder="London" >
-    <button class="weather-form__button" action = "#">OK</button>
-  </form>
+ 
   <section class="hero">
-    <div class="hero__block">
-      <div class="hero__weather">
+      
         <div class="hero__basic">
-          <p class="hero__name-town" id="timezone"></p>
-          <img src="./img/option icon/icons8-лупа-64.png" alt="лупа" class="magnifier-glass">
-          <img class="feauters" id="weather-icon" src=""></img>
-          <p class="hero__weather-name" id="weather-name"></p>
-          <p class="hero__temp" id="temp"></p>
+          <form class="weather-form"  action="">
+            <input type="text" class="weather-form__input" name="town" placeholder="London" >
+            <button class="weather-form__button" action = "#">OK</button>
+          </form>
+          <div class="main-info">
+            <p class="hero__name-town" id="timezone"></p>
+            <p class="hero__weather-name" id="weather-name"></p>
+            <img class="feauters" id="weather-icon" src=""></img>
+            <p class="hero__temp" id="temp"></p>
+          </div>
         </div>
         <div class="hero__weather-addition">
           <ul class="hero__list">
@@ -50,9 +51,8 @@
           
         </div>
         
-      </div>
+ 
       
-    </div>
   </section>
   
   <script src="./script/script.js">
