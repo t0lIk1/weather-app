@@ -1,11 +1,14 @@
 let loadScreen = document.querySelector(".loadbg")
 let hero = document.querySelector(".hero")
 let errorScrean = document.querySelector(".errorbg")
-let magnifier = document.querySelector(".magnifier-glass")
 let form = document.querySelector(".weather-form")
 let search = document.querySelector(".weather-form__button");
+let dropmenu = document.querySelector(".dropdown");
+let searchResult = document.querySelector(".weather-form__input");
 let town = "Shanghai";
-let town1;
+let selectedResult = null;
+
+
 let isCoordsObtained = false; // Флаг для отслеживания состояния получения координат
 let storage = {
   timezone: "",
@@ -33,21 +36,78 @@ const coordsTown = {
 };
 loadScreen.style.display = "flex";
 
-function submitForm(event){
-  town = document.querySelector(".weather-form__input").value;
+function submitForm(event) {
   event.preventDefault();
+  town = searchResult.value;
   translateTown(town);
 }
 search.addEventListener("click", submitForm);
 
+searchResult.addEventListener('input', () => {
+  const searchTerm = searchResult.value;
+  updateSearchResults(searchTerm);
+});
 
+
+function updateSearchResults(searchTerm) {
+  // Очистка контейнера с результатами поиска
+  dropmenu.innerHTML = '';
+  // Выполнение запроса к API
+  fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${searchTerm}&limit=5&appid=ed846c16bc89264f21455235cec96624`)
+    .then(response => response.json())
+    .then(data => {
+      // Обработка полученных данных и отображение результатов поиска
+      data.forEach(result => {
+        const resultElement = document.createElement('p');
+        resultElement.textContent = result.name + ", " + result.country;
+        dropmenu.appendChild(resultElement);
+
+        // Добавьте обработчик события для выбора элемента
+        resultElement.addEventListener('click', () => {
+          // Заполните поле ввода выбранным результатом
+          searchResult.value = result.name ;
+          // Сохраните выбранный результат
+          selectedResult = result;
+          coords(result.lat , result.lon);
+          // Очистите контейнер с результатами
+          dropmenu.innerHTML = '';
+
+          console.log(selectedResult);
+        });
+      });
+    })
+    .catch(error => {
+      console.error('Произошла ошибка:', error);
+    });
+}
+
+
+
+async function searchCity() {
+  let link = `http://api.openweathermap.org/geo/1.0/direct?q=${town}&limit=5&appid=ed846c16bc89264f21455235cec96624`;
+  try {
+    const response = await fetch(link);
+    const data = await response.json();
+    // Обработка полученных данных
+    const cities = data.map(city => city.name);
+    // Отображение результатов
+    cities.forEach(city => {
+      const result = document.querySelector('dropdown');
+      result.textContent = city;
+      document.body.appendChild(result);
+    });
+  } catch (error) {
+    console.log('Ошибка:', error);
+  }
+  
+}
+searchCity();
 navigator.geolocation.watchPosition(position => {
   if (!isCoordsObtained) {
   const { latitude, longitude } = position.coords;
   coords(latitude, longitude);
   isCoordsObtained = true; // Устанавливаем флаг в значение true после первого успешного получения координат
 }
-
   },
   error => {
     translateTown();  
@@ -89,7 +149,7 @@ function coords(latitude, longitude){
       });
 };  
 let translateTown = async () => {
-  let link = `http://api.openweathermap.org/geo/1.0/direct?q=${town}&appid=ed846c16bc89264f21455235cec96624`
+  let link = `http://api.openweathermap.org/geo/1.0/direct?q=${town}&limit=5&appid=ed846c16bc89264f21455235cec96624`
   console.log(link);  
   const linkData = async () => {
     try{
@@ -107,6 +167,7 @@ let translateTown = async () => {
     catch{
     }
   }
+  
   linkData();
 };
 let weatherIco = (main) =>{
@@ -151,7 +212,7 @@ function translateTime(Time) {
 function tratslateDeg(windDeg){
   let direction = ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW'];
     if (windDeg === 360 ){
-      
+      return direction[0];
     }
   significance = Math.round(windDeg / 45);
   return direction[significance];
@@ -205,4 +266,3 @@ Sunrise.innerHTML = translateTime(storage.sunrise);
 let Sunset = document.getElementById("sunset");
 Sunset.innerHTML = translateTime(storage.sunset);
 }
-

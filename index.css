@@ -1,3 +1,7 @@
+:root {
+  --direction: 0deg;
+}
+
 body{
   font-family: 'Oxygen', sans-serif;
   background: #000;
@@ -85,7 +89,27 @@ body{
 }
 
 
+.dropdown{
+  display: flex;  
+  gap: 8px;
+  flex-direction: column;
+  position: absolute;
+  left: 24px;
+  top: 55px;
+  width: 261px;
+  background: #fff;
+  color: #000;
+}
 
+.dropdown p {
+  font-family: 'Oxygen', sans-serif;
+  cursor: pointer;
+  font-size: 20px;
+}
+.dropdown p:hover{
+  background: #bebcbc;
+  color: #fefefe;
+}
 .load{
   -moz-user-select: none; -khtml-user-select: none; user-select: none;
   animation: load 2s 0s infinite  ;
@@ -128,6 +152,7 @@ z-index: 1000000;
   height: 37px;
   border-radius: 8px 0 0 8px;
 }
+
 .weather-form__button {
   border-radius: 0 8px 8px 0 ;
   height: 37px;

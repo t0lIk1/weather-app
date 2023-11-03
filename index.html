@@ -20,43 +20,40 @@
     <div class="error">
     </div>
     <span class="error-еу">error</span>
-  
   </div>
- 
   <section class="hero">
-      
-        <div class="hero__basic">
-          <form class="weather-form"  action="">
-            <input type="text" class="weather-form__input" name="town" placeholder="London" >
-            <button class="weather-form__button" action = "#">OK</button>
-          </form>
-          <div class="main-info">
-            <p class="hero__name-town" id="timezone"></p>
-            <p class="hero__weather-name" id="weather-name"></p>
-            <img class="feauters" id="weather-icon" src=""></img>
-            <p class="hero__temp" id="temp"></p>
-          </div>
-        </div>
-        <div class="hero__weather-addition">
-          <ul class="hero__list">
-          <li class="hero__item" ><img class="option-ico"  src="./img/option icon/icons8-скорость-ветра-43-47-64.png"><p id="windSpeed"></p></img></li>
-          <li class="hero__item" ><img class="option-ico"  src="./img/option icon/icons8-wind-direction-64.png"><p id="winddirection"></p></img></li>
-          <li class="hero__item" ><img class="option-ico"  src="./img/option icon/icons8-uv-index-64.png"><p id="uvi"></p></img></li>
-          <li class="hero__item" ><img class="option-ico"  src="./img/option icon/icons8-облако-64.png"><p id="clouds"></p></img></li>
-          <li class="hero__item" ><img class="option-ico"  src="./img/option icon/icons8-влажность-64.png"><p id="humidity"></p></img></li>
-          <li class="hero__item" ><img class="option-ico"  src="./img/option icon/icons8-барометр-64.png"><p id="pressure"></p></img></li>
-          <li class="hero__item" ><img class="option-ico"  src="./img/option icon/icons8-восход-64.png"><p id="sunrise"></p></img></li>
-          <li class="hero__item" ><img class="option-ico"  src="./img/option icon/icons8-закат-солнца-64.png"><p id="sunset"></p></img></li>
-          </ul>
-          
-        </div>
+    <div class="hero__basic">
+      <form class="weather-form">
         
- 
-      
+        <input type="text" class="weather-form__input" name="town" placeholder="London" autocomplete="off" >
+        
+        <div class="dropdown"></div>
+        
+        <button class="weather-form__button" action = "#">OK</button>
+      </form>
+      <div class="main-info">
+        <p class="hero__name-town" id="timezone"></p>
+        <p class="hero__weather-name" id="weather-name"></p>
+        <img class="feauters" id="weather-icon" src=""></img>
+        <p class="hero__temp" id="temp"></p>
+      </div>
+    </div>
+    <div class="hero__weather-addition">
+      <ul class="hero__list">
+      <li class="hero__item" ><img class="option-ico"  src="./img/option icon/icons8-скорость-ветра-43-47-64.png"><p id="windSpeed"></p></img></li>
+      <li class="hero__item" ><img class="option-ico"  src="./img/option icon/icons8-wind-direction-64.png"><p id="winddirection"></p></img></li>
+      <li class="hero__item" ><img class="option-ico"  src="./img/option icon/icons8-uv-index-64.png"><p id="uvi"></p></img></li>
+      <li class="hero__item" ><img class="option-ico"  src="./img/option icon/icons8-облако-64.png"><p id="clouds"></p></img></li>
+      <li class="hero__item" ><img class="option-ico"  src="./img/option icon/icons8-влажность-64.png"><p id="humidity"></p></img></li>
+      <li class="hero__item" ><img class="option-ico"  src="./img/option icon/icons8-барометр-64.png"><p id="pressure"></p></img></li>
+      <li class="hero__item" ><img class="option-ico"  src="./img/option icon/icons8-восход-64.png"><p id="sunrise"></p></img></li>
+      <li class="hero__item" ><img class="option-ico"  src="./img/option icon/icons8-закат-солнца-64.png"><p id="sunset"></p></img></li>
+      </ul>
+    </div>
   </section>
-  
+
+
   <script src="./script/script.js">
-    
   </script>
 </body>
 </html>
