@@ -8,10 +8,8 @@ let searchResult = document.querySelector(".weather-form__input");
 let selectedCountry = document.getElementById("selected-country");
 let timezone = document.getElementById("timezone");
 let displayedResults = [];
-let town = "Shanghai";
+let town = "Shanghai, CN";
 let selectedResult = null;
-
-
 let isCoordsObtained = false; // Флаг для отслеживания состояния получения координат
 let storage = {
   timezone: "",
@@ -43,14 +41,14 @@ function submitForm(event) {
   event.preventDefault();
   town = searchResult.value;
   translateTown(town);
-}
+};
+
 search.addEventListener("click", submitForm);
 
 searchResult.addEventListener('input', () => {
   const searchTerm = searchResult.value;
   updateSearchResults(searchTerm);
 });
-
 
 function updateSearchResults(searchTerm) {
   // Clear the dropdown
@@ -79,8 +77,7 @@ function updateSearchResults(searchTerm) {
     .catch(error => {
       console.error('An error occurred:', error);
     });
-  }
-
+};
 
 async function searchCity() {
   let link = `http://api.openweathermap.org/geo/1.0/direct?q=${town}&limit=5&appid=ed846c16bc89264f21455235cec96624`;
@@ -99,7 +96,7 @@ async function searchCity() {
     console.log('Ошибка:', error);
   }
   
-}
+};
 
 function translateCoordtoTown(latitude, longitude) {
   // Создаем URL для запроса данных о городе на основе координат
@@ -124,9 +121,8 @@ function translateCoordtoTown(latitude, longitude) {
     .catch(function (error) {
       console.error('Ошибка при запросе данных о городе:', error);
     });
-}
+};
 
-searchCity();
 navigator.geolocation.watchPosition(position => {
   if (!isCoordsObtained) {
     const { latitude, longitude } = position.coords;
@@ -136,10 +132,12 @@ navigator.geolocation.watchPosition(position => {
 }
   },
   error => {
+    timezone.textContent = town;
     translateTown();  
   },
 
 );
+
 function coords(latitude, longitude){
       const link = `https://api.openweathermap.org/data/3.0/onecall?lat=${latitude}&lon=${longitude}&units=metric&appid=ed846c16bc89264f21455235cec96624`;
       console.log(link);
@@ -173,7 +171,8 @@ function coords(latitude, longitude){
       .then(() => {
         loadScreen.style.display = "none";
       });
-};  
+}; 
+
 let translateTown = async () => {
   let link = `http://api.openweathermap.org/geo/1.0/direct?q=${town}&limit=5&appid=ed846c16bc89264f21455235cec96624`
   console.log(link);  
@@ -196,6 +195,7 @@ let translateTown = async () => {
   
   linkData();
 };
+
 let weatherIco = (main) =>{
     const value = main.toLowerCase();
     switch(value){
@@ -223,6 +223,7 @@ let weatherIco = (main) =>{
       return 'the.png';
   }
 };
+
 function translateTime(Time) {
     const date = new Date(Time*1000);
     let hours = date.getUTCHours();
@@ -234,7 +235,8 @@ function translateTime(Time) {
       minutes = '0' + minutes;
     }
     return `${hours}:${minutes}`;
-}
+};
+
 function tratslateDeg(windDeg){
   let direction = ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW'];
     if (windDeg === 360 ){
@@ -242,7 +244,8 @@ function tratslateDeg(windDeg){
     }
   significance = Math.round(windDeg / 45);
   return direction[significance];
-} 
+};
+
 let changeEl  = (e) =>{
 
 
@@ -289,4 +292,6 @@ Sunrise.innerHTML = translateTime(storage.sunrise);
 // Обновляем время заката солнца
 let Sunset = document.getElementById("sunset");
 Sunset.innerHTML = translateTime(storage.sunset);
-}
+};
+
+searchCity();
