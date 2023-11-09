@@ -30,7 +30,7 @@ body{
   border-radius: 8px 0 0 8px;
 }
 .main-info{
-  gap: 20px;
+  gap: 10px;
   margin-top: 40px ;
   display: flex;
   flex-direction: column;
@@ -38,11 +38,16 @@ body{
   align-items: center;
 }
 
-.hero__name-town {
-  font-size: 40px;
+#country{
+  font-size: 27px;
   position: absolute;
   bottom: 24px;
-  font-weight: lighter;
+  display: flex;
+}
+#timezone {
+  font-size: 27px;
+  position: absolute;
+  bottom: 24px;
   display: flex;
   }
 .hero__weather-name{
@@ -53,6 +58,7 @@ body{
 .hero__temp {
   text-align: center;
   font-weight: lighter;
+  transform: translateX(18px);
   font-size: 90px;
 }
 

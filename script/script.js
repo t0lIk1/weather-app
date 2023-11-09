@@ -1,10 +1,13 @@
-let loadScreen = document.querySelector(".loadbg")
-let hero = document.querySelector(".hero")
-let errorScrean = document.querySelector(".errorbg")
-let form = document.querySelector(".weather-form")
+let loadScreen = document.querySelector(".loadbg");
+let hero = document.querySelector(".hero");
+let errorScrean = document.querySelector(".errorbg");
+let form = document.querySelector(".weather-form");
 let search = document.querySelector(".weather-form__button");
 let dropmenu = document.querySelector(".dropdown");
 let searchResult = document.querySelector(".weather-form__input");
+let selectedCountry = document.getElementById("selected-country");
+let timezone = document.getElementById("timezone");
+let displayedResults = [];
 let town = "Shanghai";
 let selectedResult = null;
 
@@ -50,37 +53,33 @@ searchResult.addEventListener('input', () => {
 
 
 function updateSearchResults(searchTerm) {
-  // Очистка контейнера с результатами поиска
+  // Clear the dropdown
   dropmenu.innerHTML = '';
-  // Выполнение запроса к API
+  // Execute the API request
   fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${searchTerm}&limit=5&appid=ed846c16bc89264f21455235cec96624`)
     .then(response => response.json())
     .then(data => {
-      // Обработка полученных данных и отображение результатов поиска
       data.forEach(result => {
         const resultElement = document.createElement('p');
-        resultElement.textContent = result.name + ", " + result.country;
-        dropmenu.appendChild(resultElement);
-
-        // Добавьте обработчик события для выбора элемента
-        resultElement.addEventListener('click', () => {
-          // Заполните поле ввода выбранным результатом
-          searchResult.value = result.name ;
-          // Сохраните выбранный результат
-          selectedResult = result;
-          coords(result.lat , result.lon);
-          // Очистите контейнер с результатами
-          dropmenu.innerHTML = '';
-
-          console.log(selectedResult);
-        });
+        resultElement.textContent = result.name + ', ' + result.country;
+        // Check if the result is already displayed
+        if (!displayedResults.includes(resultElement.textContent)) {
+          dropmenu.appendChild(resultElement);
+          displayedResults.push(resultElement.textContent);
+          resultElement.addEventListener('click', () => {
+            searchResult.value = result.name + ", " + result.country;
+            timezone.textContent = result.name + ", " + result.country;
+            selectedResult = result;
+            coords(result.lat, result.lon);
+            dropmenu.innerHTML = '';
+          });
+        }
       });
     })
     .catch(error => {
-      console.error('Произошла ошибка:', error);
+      console.error('An error occurred:', error);
     });
-}
-
+  }
 
 
 async function searchCity() {
@@ -101,11 +100,38 @@ async function searchCity() {
   }
   
 }
+
+function translateCoordtoTown(latitude, longitude) {
+  // Создаем URL для запроса данных о городе на основе координат
+  const url = `https://api.openweathermap.org/geo/1.0/reverse?lat=${latitude}&lon=${longitude}&limit=1&appid=ed846c16bc89264f21455235cec96624`;
+
+  // Отправляем запрос
+  fetch(url)
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      // Получаем данные о городе из ответа
+      town = data[0].name;
+      const country = data[0].country;
+
+      // Теперь у вас есть название города и страны, которые можно использовать
+      // в вашем приложении или вывести их на экран
+      timezone.textContent = data[0].name + ', ' + data[0].country;
+      country.textContent = data[0].country;
+      translateTown();
+    })
+    .catch(function (error) {
+      console.error('Ошибка при запросе данных о городе:', error);
+    });
+}
+
 searchCity();
 navigator.geolocation.watchPosition(position => {
   if (!isCoordsObtained) {
-  const { latitude, longitude } = position.coords;
-  coords(latitude, longitude);
+    const { latitude, longitude } = position.coords;
+    translateCoordtoTown(latitude, longitude);
+    coords(latitude, longitude);
   isCoordsObtained = true; // Устанавливаем флаг в значение true после первого успешного получения координат
 }
   },
@@ -218,9 +244,7 @@ function tratslateDeg(windDeg){
   return direction[significance];
 } 
 let changeEl  = (e) =>{
-// Обновляем название города  
-let town = document.getElementById("timezone");
-town.textContent = storage.timezone;
+
 
 // Обновляем название погоды
 let nameWeather = document.getElementById("weather-name");
