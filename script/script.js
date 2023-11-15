@@ -1,8 +1,20 @@
+var swiper = new Swiper('.swiper', {
+  slidesPerView: 1,
+  spaceBetween: 500,
+  navigation: {
+    nextEl: '.swiper-button-next',
+    prevEl: '.swiper-button-prev',
+  },
+  pagination: {
+    el: '.swiper-pagination',
+    type: 'bullets',
+  },
+});
+
 let loadScreen = document.querySelector(".loadbg");
 let hero = document.querySelector(".hero");
 let errorScrean = document.querySelector(".errorbg");
 let form = document.querySelector(".weather-form");
-let search = document.querySelector(".weather-form__button");
 let dropmenu = document.querySelector(".dropdown");
 let searchResult = document.querySelector(".weather-form__input");
 let selectedCountry = document.getElementById("selected-country");
@@ -26,6 +38,7 @@ let storage = {
     weather: { 0:{ main:"sunny",icon: "icons8-partly-cloudy-day-100.png" } } ,
   },
 };
+
 const coordsTown = {
   0:{
     lat: 15,
@@ -42,8 +55,6 @@ function submitForm(event) {
   town = searchResult.value;
   translateTown(town);
 };
-
-search.addEventListener("click", submitForm);
 
 searchResult.addEventListener('input', () => {
   const searchTerm = searchResult.value;
@@ -140,6 +151,7 @@ navigator.geolocation.watchPosition(position => {
 
 function coords(latitude, longitude){
       const link = `https://api.openweathermap.org/data/3.0/onecall?lat=${latitude}&lon=${longitude}&units=metric&appid=ed846c16bc89264f21455235cec96624`;
+      updateSwiper(link);
       console.log(link);
       const linkData = async () => {
       try{
@@ -294,4 +306,55 @@ let Sunset = document.getElementById("sunset");
 Sunset.innerHTML = translateTime(storage.sunset);
 };
 
+function translateDate(Time) {
+  const date = new Date(Time*1000);
+  let time = date.getUTCDay()+1;
+  let day = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  if (time === 7){
+    time = 0;
+  }
+  return day[time];
+};
 searchCity();
+async function updateSwiper(url) {
+  const swiperContainer = document.querySelector('.swiper-wrapper');
+
+  try {
+    const res = await fetch(url);
+    const data = await res.json();
+
+    // Clear existing slides
+    swiperContainer.innerHTML = '';
+
+    for (let i = 0; i < 7; i++) {
+      const slideData = {
+        dt: data.daily[i].dt,
+        day: data.daily[i].temp.day,
+        main: data.daily[i].weather[0].main,
+      };
+
+      const newSlide = document.createElement('div');
+      newSlide.classList.add('swiper-slide');
+
+      const slideContent = document.createElement('div');
+      slideContent.classList.add('slide-content');
+
+      const slideText = document.createElement('p');
+      const img = document.createElement('img');
+      img.setAttribute( 'src', `${ './img/' + weatherIco(slideData.main)}` );
+      
+      slideText.textContent = `Date: ${translateDate(slideData.dt)}, Weather: ${slideData.main}, Temperature: ${slideData.day}°C`;
+      slideContent.appendChild(img); 
+      slideContent.appendChild(slideText);
+      newSlide.appendChild(slideContent);
+      swiperContainer.appendChild(newSlide);
+    }
+
+    // Update Swiper after modifying the slides
+    swiper.update();
+  } catch (error) {
+    console.error("Error fetching weather data:", error);
+  }
+}
+
+updateSwiper();

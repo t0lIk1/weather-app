@@ -8,6 +8,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Oxygen:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
   <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
   <title>weather</title>
 </head>
@@ -15,6 +17,7 @@
   <div class="loadbg">
     <div class="load">
     </div>
+    
   </div>
   <div class="errorbg">
     <div class="error">
@@ -29,7 +32,6 @@
         
         <div class="dropdown"></div>
         
-        <button class="weather-form__button" action = "#">OK</button>
       </form>
       <div class="main-info">
         <p id="country"></p>
@@ -50,11 +52,25 @@
       <li class="hero__item" ><img class="option-ico"  src="./img/option icon/icons8-восход-64.png"><p id="sunrise"></p></img></li>
       <li class="hero__item" ><img class="option-ico"  src="./img/option icon/icons8-закат-солнца-64.png"><p id="sunset"></p></img></li>
       </ul>
+      <div class="swiper">
+        <!-- Additional required wrapper -->
+        <div class="swiper-wrapper">
+    
+        </div>
+        <!-- If we need pagination -->
+        <div class="swiper-pagination"></div>
+      
+        <!-- If we need navigation buttons -->
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+      
+        <!-- If we need scrollbar -->
+      </div>
     </div>
   </section>
 
 
-  <script src="./script/script.js">
+  <script src="./script/script.js" src="https://unpkg.com/swiper/swiper-bundle.min.js">
   </script>
 </body>
 </html>
