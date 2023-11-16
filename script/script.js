@@ -39,6 +39,8 @@ let storage = {
   },
 };
 
+const debouncedUpdateSearchResults = debounce(updateSearchResults, 300);
+
 const coordsTown = {
   0:{
     lat: 15,
@@ -58,7 +60,7 @@ function submitForm(event) {
 
 searchResult.addEventListener('input', () => {
   const searchTerm = searchResult.value;
-  updateSearchResults(searchTerm);
+  debouncedUpdateSearchResults(searchTerm)
 });
 
 function updateSearchResults(searchTerm) {
@@ -355,6 +357,17 @@ async function updateSwiper(url) {
   } catch (error) {
     console.error("Error fetching weather data:", error);
   }
+}
+function debounce(func, delay) {
+  let timer;
+  return function () {
+    const context = this;
+    const args = arguments;
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      func.apply(context, args);
+    }, delay);
+  };
 }
 
 updateSwiper();
