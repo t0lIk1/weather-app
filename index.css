@@ -97,24 +97,27 @@ body{
 
 .dropdown{
   display: flex;  
-  gap: 8px;
   flex-direction: column;
   position: absolute;
   left: 24px;
-  top: 55px;
+  top: 11%;
   width: 312px;
   background: #fff;
   color: #000;
 }
 
 .dropdown p {
+  padding: 5px 16px;
+  
+  background: #f6f6f6;
   font-family: 'Oxygen', sans-serif;
   cursor: pointer;
   font-size: 20px;
+  transition: 0.3s ease-in-out;
 }
 .dropdown p:hover{
-  background: #bebcbc;
-  color: #fefefe;
+  background: #ddd;
+
 }
 .load{
   -moz-user-select: none; -khtml-user-select: none; user-select: none;
@@ -156,7 +159,7 @@ z-index: 1000000;
   padding: 15px 5px 15px 15px;
   width: 312px;
   height: 37px;
-  border-radius: 8px ;
+  border-radius: 8px 8px 0 0 ;
 }
 
 
