@@ -3,74 +3,123 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./null.css">
-  <link rel="stylesheet" href="./index.css">
+  <link rel="stylesheet" href="/index.css">
+  <link rel="stylesheet" href="/null.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Oxygen:wght@300;400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
-  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
-  <title>weather</title>
+  <title>Weather App</title>
 </head>
 <body>
   <div class="loadbg">
-    <div class="load">
-    </div>
-    
+    <div class="load"></div>
   </div>
+  
   <div class="errorbg">
-    <div class="error">
-    </div>
+    <div class="error"></div>
     <span class="error-еу">error</span>
   </div>
-  <section class="hero">
-    <div class="hero__basic">
-      <form class="weather-form">
-        
-        <input type="text" class="weather-form__input" name="town" placeholder="London" autocomplete="off" >
-        
-        <div class="dropdown"></div>
-        
+  
+  <section class="main">
+    <div class="container">
+      <form action="#" class="main__form">
+          <input type="text" class="main__form-input" placeholder="London..." autocomplete="off">
+          <div class="dropdown"></div>
       </form>
-      <div class="main-info">
-        <p id="country"></p>
-        <p class="hero__name-town" id="timezone"></p>
-        <p class="hero__weather-name" id="weather-name"></p>
-        <img class="feauters" id="weather-icon" src=""></img>
-        <p class="hero__temp" id="temp"></p>
-      </div>
-    </div>
-    <div class="hero__weather-addition">
-      <ul class="hero__list">
-      <li class="hero__item" ><img class="option-ico"  src="./img/option icon/icons8-скорость-ветра-43-47-64.png"><p id="windSpeed"></p></img></li>
-      <li class="hero__item" ><img class="option-ico"  src="./img/option icon/icons8-wind-direction-64.png"><p id="winddirection"></p></img></li>
-      <li class="hero__item" ><img class="option-ico"  src="./img/option icon/icons8-uv-index-64.png"><p id="uvi"></p></img></li>
-      <li class="hero__item" ><img class="option-ico"  src="./img/option icon/icons8-облако-64.png"><p id="clouds"></p></img></li>
-      <li class="hero__item" ><img class="option-ico"  src="./img/option icon/icons8-влажность-64.png"><p id="humidity"></p></img></li>
-      <li class="hero__item" ><img class="option-ico"  src="./img/option icon/icons8-барометр-64.png"><p id="pressure"></p></img></li>
-      <li class="hero__item" ><img class="option-ico"  src="./img/option icon/icons8-восход-64.png"><p id="sunrise"></p></img></li>
-      <li class="hero__item" ><img class="option-ico"  src="./img/option icon/icons8-закат-солнца-64.png"><p id="sunset"></p></img></li>
-      </ul>
-      <div class="swiper">
-        <!-- Additional required wrapper -->
-        <div class="swiper-wrapper">
-    
+
+      <div class="main-inner">
+        <!-- town&temp -->
+        <div class="main-inner__item">
+          <div class="info">
+            <span class="info-town">town</span>
+            <span class="info-date">21</span>
+            <span class="info-temp" id="temp">temp</span>
+            <span class="info-feelslike" id="feelslike">feelslike: 21</span>
+          </div>
         </div>
-        <!-- If we need pagination -->
-        <div class="swiper-pagination"></div>
-      
-        <!-- If we need navigation buttons -->
-        <div class="swiper-button-prev"></div>
-        <div class="swiper-button-next"></div>
-      
-        <!-- If we need scrollbar -->
+
+        <!-- current-weather -->
+        <div class="main-inner__item">
+          <div class="weather-info">
+            <div class="weather-info__text">
+              <img src="/img/day_clear.png" alt="" class="weather-info__img">
+              <span class="weather-info__name">Rainy</span>
+            </div>
+            <div class="weather-info__base">
+              <ul class="info-list">
+                <li class="info-item">
+                  <img src="/img/svg/icons8-скорость-ветра-43-47-50.png" alt="" class="info-item__ico">
+                  <span class="info-item__value" id="windspeed">31</span> 
+                  <span class="info-item__name">Wind Speed</span>
+                </li>
+                <li class="info-item">
+                  <img src="/img/svg/icons8-роза-ветров-50.png" alt="" class="info-item__ico">
+                  <span class="info-item__value" id="windDeg">31</span> 
+                  <span class="info-item__name">Wind Deg</span>
+                </li> 
+                <li class="info-item">
+                  <img src="/img/svg/icons8-барометр-50.png" alt="" class="info-item__ico">
+                  <span class="info-item__value" id="pressure">31</span> 
+                  <span class="info-item__name">Pressure</span>
+                </li>
+                <li class="info-item">
+                  <img src="/img/svg/icons8-влажность-50.png" alt="" class="info-item__ico">
+                  <span class="info-item__value" id="humadility">31</span> 
+                  <span class="info-item__name">Humadility</span>
+                </li>
+                <li class="info-item">
+                  <img src="/img/svg/icons8-облака-50.png" alt="" class="info-item__ico">
+                  <span class="info-item__value" id="clouds">31</span> 
+                  <span class="info-item__name">Clouds</span>
+                </li>
+                <li class="info-item">
+                  <img src="/img/svg/icons8-uv-index-64.png" alt="" class="info-item__ico">
+                  <span class="info-item__value" id="UV">31</span> 
+                  <span class="info-item__name">UV</span>
+                </li>
+                <li class="info-item">
+                  <img src="/img/svg/icons8-восход-50.png" alt="" class="info-item__ico">
+                  <span class="info-item__value" id="sunrise">31</span> 
+                  <span class="info-item__name">Sunrise</span>
+                </li>
+                <li class="info-item">
+                  <img src="/img/svg/icons8-закат-солнца-50.png" alt="" class="info-item__ico">
+                  <span class="info-item__value" id="sunset">31</span> 
+                  <span class="info-item__name">Sunset</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- dayli-weather -->
+        <div class="main-inner__item">
+          <div class="daily"></div>
+        </div>
+
+        <!-- hourly-weather -->
+        <div class="main-inner__item">
+          <div class="hourly-weather">
+            <div class="swiper">
+              <!-- Additional required wrapper -->
+              <div class="swiper-wrapper">
+          
+              </div>
+              <!-- If we need pagination -->
+            
+              <!-- If we need navigation buttons -->
+              <div class="swiper-button-prev"></div>
+              <div class="swiper-button-next"></div>
+            
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
+  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+  <script src="/script/script.js"></script>
 
-
-  <script src="./script/script.js" src="https://unpkg.com/swiper/swiper-bundle.min.js">
-  </script>
 </body>
 </html>
