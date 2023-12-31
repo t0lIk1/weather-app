@@ -17,6 +17,8 @@ let updateIco = (main) => {
       return 'fog.png';
     case 'mist':
       return 'fog.png';
+    case 'haze':
+      return 'fog.png';
     case 'sleet':
       return 'sleet.png';
     case 'clear':

@@ -11,7 +11,7 @@ function submitForm(event) {
 
 function updateSearchResults(searchTerm) {
   dropmenu.innerHTML = '';
-  fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${searchTerm}&limit=5&appid=ed846c16bc89264f21455235cec96624`)
+  fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${searchTerm}&limit=5&appid=${apikey}`)
     .then(response => response.json())
     .then(data => {
       if (searchTerm.trim() !== '' && data.length > 0) {
@@ -48,7 +48,7 @@ const debouncedUpdateSearchResults = debounce(updateSearchResults, 1000);
 
 
 async function searchCity() {
-  let link = `https://api.openweathermap.org/geo/1.0/direct?q=${town}&limit=5&appid=ed846c16bc89264f21455235cec96624`;
+  let link = `https://api.openweathermap.org/geo/1.0/direct?q=${town}&limit=5&appid=${apikey}`;
   try {
     const response = await fetch(link);
     const data = await response.json();
@@ -64,6 +64,8 @@ async function searchCity() {
   }
 };
 
+function yourPosition() {
+loadScreen.style.display = "flex";
 navigator.geolocation.watchPosition(
   (position) => {
     if (!isCoordsObtained ) {
@@ -84,3 +86,4 @@ navigator.geolocation.watchPosition(
     // Handle other geolocation errors here
   }
 );
+}
