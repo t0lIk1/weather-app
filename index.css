@@ -329,7 +329,7 @@ transform: rotate(-40deg);
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
+  gap: 10px;
 }
 .api-key {
   border: 3px solid #616161;  /*6161618*/
@@ -359,7 +359,7 @@ transform: rotate(-40deg);
   align-items: center;
 }
 .errortext{
-  font-size: 20px;
+  font-size: 15px;
   opacity: 0;
   color: #d60000;
   transition: 0.5s ease-in-out;
@@ -373,4 +373,8 @@ transform: rotate(-40deg);
 
 .api-key__send.red {
   border-color: #eb1d1d;
+}
+
+.title{
+  font-size: 25px;
 }

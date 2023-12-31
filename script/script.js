@@ -150,6 +150,7 @@ function debounce(func, delay) {
         }, delay);
     };
 }
+localStorage.removeItem('api-key');
 if (apikey) {
     yourPosition();
 } else {
