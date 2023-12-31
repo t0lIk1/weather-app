@@ -63,27 +63,3 @@ async function searchCity() {
     console.log('Error:', error);
   }
 };
-
-function yourPosition() {
-loadScreen.style.display = "flex";
-navigator.geolocation.watchPosition(
-  (position) => {
-    if (!isCoordsObtained ) {
-      const { latitude, longitude } = position.coords;
-      coords(latitude, longitude);
-      getTownDate(latitude, longitude);
-    }
-    isCoordsObtained = true;
-  },
-  (error) => {
-    if (!isCoordsObtained) {
-
-      nameTown.textContent = town;
-      translateTown();
-      
-    }
-
-    // Handle other geolocation errors here
-  }
-);
-}
