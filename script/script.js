@@ -14,7 +14,7 @@ var swiper = new Swiper('.swiper',  {
 
 let loadScreen = document.querySelector(".loadbg");
 let apiKey = document.querySelector(".api-key");
-let screen = document.querySelector(".api-screen");
+let screen = document.querySelector(".api-container");
 let ertext = document.querySelector(".errortext");
 let but = document.querySelector(".api-key__send");
 let main = document.querySelector(".main");
@@ -77,7 +77,6 @@ async function getTownDate(latitude, longitude) {
         console.error('Error fetching data for the town:', error);
     }
 }
-
 function coords(latitude, longitude) {
     const link = `https://api.openweathermap.org/data/3.0/onecall?lat=${latitude}&lon=${longitude}&units=metric&appid=${apikey}`;
     console.log(link);
@@ -155,7 +154,6 @@ if (apikey) {
 } else {
     screen.style.display = "flex";
 }
-
 function apitest(event) {
     event.preventDefault();
     let key = apiKey.value.trim();
@@ -206,22 +204,22 @@ function failure() {
 }
 
 function yourPosition() {
-  loadScreen.style.display = "flex";
-  navigator.geolocation.watchPosition(
-      (position) => {
-          if (!isCoordsObtained) {
-              const { latitude, longitude } = position.coords;
-              coords(latitude, longitude);
-              getTownDate(latitude, longitude);
-          }
-          isCoordsObtained = true;
-      },
-      (error) => {
-          if (!isCoordsObtained) {
-              nameTown.textContent = town;
-              translateTown();
-          }
-          // Handle other geolocation errors here
-      }
-  );
+loadScreen.style.display = "flex";
+navigator.geolocation.watchPosition(
+    (position) => {
+        if (!isCoordsObtained) {
+            const { latitude, longitude } = position.coords;
+            coords(latitude, longitude);
+            getTownDate(latitude, longitude);
+        }
+        isCoordsObtained = true;
+    },
+    (error) => {
+        if (!isCoordsObtained) {
+            nameTown.textContent = town;
+            translateTown();
+        }
+        // Handle other geolocation errors here
+    }
+);
 }
