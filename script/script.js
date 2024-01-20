@@ -236,3 +236,12 @@ res.addEventListener('click', () => {
   localStorage.removeItem('api-key');
   location.reload();
 });
+
+
+const slider = document.querySelector('.slider');
+
+slider.addEventListener('click', () => {
+    slider.classList.toggle('far');
+});
+
+
