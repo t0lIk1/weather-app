@@ -223,3 +223,16 @@ navigator.geolocation.watchPosition(
     }
 );
 }
+
+
+
+
+
+
+
+const res = document.querySelector('.reset');
+
+res.addEventListener('click', () => {
+  localStorage.removeItem('api-key');
+  location.reload();
+});

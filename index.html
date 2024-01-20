@@ -18,7 +18,7 @@
   <div class="api-screen">
     <form action="#" class="api-form">
       <h1 class="title">Enter api-key</h1>
-      <span class="subtitle">the key can be obtained from <a href="https://home.openweathermap.org/api_keys" class="link">openweathermap</a></span>
+      <span class="subtitle">the key can be obtained from <a target="_blank" href="https://home.openweathermap.org/api_keys" class="link">openweathermap</a></span>
       <span class="errortext">api-key entered incorrectly</span>
       <div class="block">
         <input type="text" class="api-key">
@@ -35,9 +35,38 @@
     <div class="error"></div>
     <span class="error-еу">error</span>
   </div>
+
+  <div class="burger-menu">
+    <input id="menu-toggle" type="checkbox" />
+    <label class="menu-btn" for="menu-toggle">
+      <span></span>
+    </label>
+ 
+    <ul class="menubox">
+            <li>
+              <div class="main">
+                <input type="checkbox" id="hidcheck" hidden>
+                <label class="capsule" for="hidcheck" id="capsule-id">
+                  <div class="circle"></div>
+                  <div class="text-signs">
+                    <span id="on"></span>
+                  </div>
+                </label>
+              </div>
+          </li>
+          <li>
+            <label class="menu-item" for="temperature-switch">Toggle Fahrenheit</label>
+            <input type="checkbox" id="temperature-switch">
+          </li>
+            <li class="reset"><span class="menu-item" href="#" style="color: rgb(175, 5, 5);">Reset api-key</span></li>
+    </ul>
+  </div>
   
+
+
   <section class="main">
     <div class="container">
+      
       <form action="#" class="main__form">
           <input type="text" class="main__form-input" placeholder="London..." autocomplete="off">
           <div class="dropdown"></div>

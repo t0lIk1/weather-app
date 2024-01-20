@@ -1,5 +1,5 @@
 async function translateTown() {
-  let link = `http://api.openweathermap.org/geo/1.0/direct?q=${town}&limit=1&appid=ed846c16bc89264f21455235cec96624`
+  let link = `http://api.openweathermap.org/geo/1.0/direct?q=${town}&limit=1&appid=${apikey}`;
   console.log(link);
   const linkData = async () => {
     try {
