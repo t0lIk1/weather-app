@@ -134,15 +134,24 @@ async function updateSwiper(url) {
       const slideContent = document.createElement('div');
       slideContent.classList.add('slide-content');
 
+
+      const day = document.createElement('p');
+      day.textContent = (translateDay(slideData.dt));
+
+
       const weather = document.createElement('p');
       weather.textContent = slideData.main;
+
       const dayText = document.createElement('p');
       dayText.textContent = translateTime(slideData.dt);
+
       const temp = document.createElement('p');
       temp.textContent = Math.round(slideData.day) + '°C';
+
       const img = document.createElement('img');
       img.setAttribute( 'src', `${ './img/' + updateIco(slideData.main)}` );
       
+      blockSlide.appendChild(day);
       blockSlide.appendChild(dayText);
       blockSlide.appendChild(img); 
       blockSlide.appendChild(weather);

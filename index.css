@@ -49,7 +49,7 @@ body {
   color: var(--light-color);
   border-radius: 20px; 
   background: var(--grey);
-  box-shadow: 0px 4px 40px 0px rgba(0, 0, 0, 0.25);
+  border: 2px solid black;
   transition: 0.1s border-radius ease-in-out;
 }
 
@@ -69,10 +69,11 @@ body {
   align-items: center;
   justify-content: center;
   height: 280px;
-  padding: 15px 27px;
+  padding: 15px 25px;
   background: #444444;
   border-radius: 30px;
-  box-shadow: 10px 10px 4px 0px rgba(0, 0, 0, 0.50);
+  border: 2px solid black;
+  /* box-shadow: 10px 10px 4px 0px rgba(0, 0, 0, 0.50); */
 }
 
 .info{
@@ -244,7 +245,7 @@ transform: rotate(-40deg);
   font-size: 50px;
 }
 
-.dropdown { 
+.dropdown {
   position: absolute;
   width: 50%;
   background: #fff;
@@ -253,6 +254,8 @@ transform: rotate(-40deg);
   top: 10%; 
 }
 .dropdown p {
+
+  z-index: 1100;
   padding: 5px 16px;
   background: #f6f6f6;
   font-family: 'Oxygen', sans-serif;

@@ -63,3 +63,15 @@ function translateDate(utcDate) {
 
   return `${dayOfWeek}, ${month} ${dayOfMonth} `;
 }
+
+function translateDay(utcDate){
+  
+
+  const daysOfWeek = [
+    'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'
+  ];
+  const date = new Date(utcDate * 1000);
+  const dayOfMonth = date.getUTCDate();
+  const dayOfWeek = daysOfWeek[date.getUTCDay()];
+  return `${dayOfWeek}, ${dayOfMonth} `;
+}
