@@ -128,6 +128,8 @@ async function updateSwiper(url) {
 
       const newSlide = document.createElement('div');
       newSlide.classList.add('swiper-slide');
+      const blockSlide = document.createElement('div');
+      blockSlide.classList.add('swiper-block');
 
       const slideContent = document.createElement('div');
       slideContent.classList.add('slide-content');
@@ -141,10 +143,12 @@ async function updateSwiper(url) {
       const img = document.createElement('img');
       img.setAttribute( 'src', `${ './img/' + updateIco(slideData.main)}` );
       
-      newSlide.appendChild(dayText);
-      newSlide.appendChild(img); 
-      newSlide.appendChild(weather);
-      newSlide.appendChild(temp);
+      blockSlide.appendChild(dayText);
+      blockSlide.appendChild(img); 
+      blockSlide.appendChild(weather);
+      blockSlide.appendChild(temp);
+      newSlide.appendChild(blockSlide);
+
       // newSlide.appendChild(slideContent);
       swiperContainer.appendChild(newSlide);
     }

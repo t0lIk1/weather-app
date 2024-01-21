@@ -65,6 +65,10 @@ body {
   gap: 15px;
 }
 .main-inner__item{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 280px;
   padding: 15px 27px;
   background: #444444;
   border-radius: 30px;
@@ -72,9 +76,11 @@ body {
 }
 
 .info{
-  display: grid;
-  grid-template-columns: repeat(1, 1fr);
-  gap: 20px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .info-town {
@@ -102,10 +108,12 @@ body {
 }
 
 .weather-info {
+  width: 100%;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
 }
 .weather-info__text {
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -123,16 +131,18 @@ body {
 .weather-info__base {
 }
 .info-list {
+  min-height: 250px;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 30px;
 }
 .info-item {
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 8px;
+  gap: 0.8em;
 }
 .info-item__ico {
   width: 50px;
@@ -256,14 +266,22 @@ transform: rotate(-40deg);
 
 }
 
-.daily .day-content{
+.daily{
+  width: 100%;
+  height: 100%;
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.day-content{
+  display: flex;
+  justify-content: space-between;
+  align-items: center; /* применяем  по вертикали */
   gap: 52px;
 }
 
 .daily-Weather{
-  display: flex;
 }
 
 .daily p{
@@ -290,10 +308,18 @@ transform: rotate(-40deg);
 .swiper-slide {
   width: 130px;
   height: 250px;
-  padding: 13px 31px;
+  padding: 13px 21px;
   border-radius: 40px;
   color: #fff;
   background: var(--dark-grey);
+}
+.swiper-block{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .swiper-slide p {
@@ -414,8 +440,8 @@ transform: rotate(-40deg);
   display: flex;
   align-items: center;
   position: absolute;
-  top: 10px;
-  right:10px;
+  top: 20px;
+  right:20px;
   width: 26px;
   height: 26px;
   cursor: pointer;
@@ -572,3 +598,8 @@ input:checked + .slider:before {
 .slider.round:before {
   border-radius: 50%;
 }
+
+
+
+
+
