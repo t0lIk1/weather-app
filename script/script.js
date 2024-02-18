@@ -51,6 +51,17 @@ let storage = {
         },
     },
 };
+
+
+
+
+
+
+const poiskDiv = document.querySelector('.poisk');
+const poisk = document.querySelector('.poisk-input');
+const dropmenupoisk = document.querySelector('.dropmeu-poisk');
+
+
 const coordsTown = {
     0: {
         lat: 15,
@@ -88,7 +99,7 @@ function coords(latitude, longitude) {
             const data = await res.json();
             let {
                 timezone,
-                current: {
+                current: {	
                     temp,
                     pressure,
                     sunrise,
@@ -203,6 +214,49 @@ function failure() {
     );
 }
 
+
+
+
+
+
+
+// function updatepoiskts(searchTerm,drop,input) {
+//     drop.innerHTML = '';
+//   fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${searchTerm}&limit=5&appid=${apikey}`)
+//     .then(response => response.json())
+//     .then(data => {
+//       if (searchTerm.trim() !== '' && data.length > 0) {
+//         // Если введенный термин поиска не пустой и есть результаты, добавляем класс 'active'
+//         input.classList.add('active');
+//       } else {
+//         // Если введенный термин поиска пустой или результатов нет, убираем класс 'active'
+//         input.classList.remove('active');
+//       }
+//       data.forEach(result => {
+//         const resultElement = document.createElement('p');
+//         resultElement.textContent = result.name + ', ' + result.country;
+//         if (!displayedResults.includes(resultElement.textContent)) {
+//             drop.appendChild(resultElement);
+//           displayedResults.push(resultElement.textContent);
+//           resultElement.addEventListener('click', () => {
+//             input.value = result.name + ", " + result.country;
+//             nameTown.innerHTML = result.name + ", " + result.country;
+//             input.classList.remove('active');
+//             selectedResult = result;
+//             coords(result.lat, result.lon);
+//             drop.innerHTML = '';
+//           });
+          
+//         }
+//       });
+//     })
+//     .catch(error => {
+//       console.error('An error occurred:', error);
+//     });
+    
+// }
+
+
 function yourPosition() {
 loadScreen.style.display = "flex";
 navigator.geolocation.watchPosition(
@@ -217,17 +271,14 @@ navigator.geolocation.watchPosition(
     (error) => {
         if (!isCoordsObtained) {
             nameTown.textContent = town;
+            poiskDiv.style.display = 'block'
             translateTown();
+
         }
         // Handle other geolocation errors here
     }
 );
 }
-
-
-
-
-
 
 
 const res = document.querySelector('.reset');
@@ -243,5 +294,7 @@ const slider = document.querySelector('.slider');
 slider.addEventListener('click', () => {
     slider.classList.toggle('far');
 });
+
+
 
 

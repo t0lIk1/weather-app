@@ -1,6 +1,6 @@
 searchResult.addEventListener('input', () => {
   const searchTerm = searchResult.value;
-  updateSearchResults(searchTerm);
+  updateDropMenu(searchTerm,dropmenu,searchResult);
 });
 
 function submitForm(event) {
@@ -9,31 +9,43 @@ function submitForm(event) {
   translateTown(town);
 }
 
-function updateSearchResults(searchTerm) {
-  dropmenu.innerHTML = '';
+poisk.addEventListener('input', () => {
+  const searchTerm = poisk.value;
+  updateDropMenu(searchTerm,dropmenupoisk,poisk);
+});
+
+function submitForm(event) {
+  event.preventDefault();
+  town = poisk.value;
+  translateTown(town);
+}
+
+function updateDropMenu(searchTerm,drop,input) {
+  drop.innerHTML = '';
   fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${searchTerm}&limit=5&appid=${apikey}`)
     .then(response => response.json())
     .then(data => {
       if (searchTerm.trim() !== '' && data.length > 0) {
         // Если введенный термин поиска не пустой и есть результаты, добавляем класс 'active'
-        searchResult.classList.add('active');
+        input.classList.add('active');
       } else {
         // Если введенный термин поиска пустой или результатов нет, убираем класс 'active'
-        searchResult.classList.remove('active');
+        input.classList.remove('active');
       }
       data.forEach(result => {
         const resultElement = document.createElement('p');
         resultElement.textContent = result.name + ', ' + result.country;
         if (!displayedResults.includes(resultElement.textContent)) {
-          dropmenu.appendChild(resultElement);
+          drop.appendChild(resultElement);
           displayedResults.push(resultElement.textContent);
           resultElement.addEventListener('click', () => {
-            searchResult.value = result.name + ", " + result.country;
+            input.value = result.name + ", " + result.country;
             nameTown.innerHTML = result.name + ", " + result.country;
-            searchResult.classList.remove('active');
+            input.classList.remove('active');
             selectedResult = result;
             coords(result.lat, result.lon);
-            dropmenu.innerHTML = '';
+            drop.innerHTML = '';
+            poiskDiv.style.display = 'none';
           });
           
         }
@@ -44,7 +56,7 @@ function updateSearchResults(searchTerm) {
     });
     
 }
-const debouncedUpdateSearchResults = debounce(updateSearchResults, 1000);
+const debouncedMenu = debounce(updateDropMenu, 1000);
 
 
 async function searchCity() {
