@@ -27,7 +27,6 @@ let updateIco = (main) => {
       return 'the.png';
   }
 };
-
 function updateAllInfo() {
   let nameWeather = document.querySelector(".weather-info__name");
   nameWeather.innerHTML = storage.main;
@@ -36,10 +35,20 @@ function updateAllInfo() {
   date.innerHTML = translateDate(storage.dt);
   
   let temp = document.getElementById("temp");
-  temp.innerHTML = Math.round(storage.temp) ;
+  if (units === "imperial") {
+    // Если используется английская система, конвертируем температуру в градусы Фаренгейта
+    temp.innerHTML = Math.round((storage.temp * 9/5) + 32) + '°F';
+  } else {
+    // Иначе отображаем температуру в градусах Цельсия
+    temp.innerHTML = Math.round(storage.temp) + '°C';
+  }
 
   let feelsLikes = document.getElementById("feelslike");
-  feelsLikes.innerHTML = 'feelslike: ' + Math.round(storage.feelsLike) + '°C';
+  if (units === "imperial") {
+    feelsLikes.innerHTML = 'feelslike: ' + Math.round((storage.feelsLike * 9/5) + 32) + '°F';
+  } else {
+    feelsLikes.innerHTML = 'feelslike: ' + Math.round(storage.feelsLike) + '°C';
+  }
   
   let weatherIcon = document.querySelector(".weather-info__img");
   weatherIcon.src = './img/' + updateIco(storage.main);
@@ -68,6 +77,7 @@ function updateAllInfo() {
   let Sunset = document.getElementById("sunset");
   Sunset.innerHTML = translateTime(storage.sunset);
 }
+
 
 async function weatherDay(url) {
   const daily = document.querySelector('.daily');

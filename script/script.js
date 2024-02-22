@@ -4,14 +4,13 @@ var swiper = new Swiper('.swiper',  {
   navigation: {
     nextEl: '.swiper-button-next',
     prevEl: '.swiper-button-prev',
-  },
+  },    
   pagination: {
     clickable: true,
     el: '.swiper-pagination',
     type: 'bullets',
   },
 });
-
 let loadScreen = document.querySelector(".loadbg");
 let apiKey = document.querySelector(".api-key");
 let screen = document.querySelector(".api-container");
@@ -52,6 +51,21 @@ let storage = {
     },
 };
 
+let units = localStorage.getItem('units')||'imperial';;
+const temperatureToggle = document.querySelector('.button-togle');
+temperatureToggle.addEventListener('click', () => {
+    if (units === 'metric') {
+        units = 'imperial';
+    } else {
+        units = 'metric';
+    }
+
+    // Сохраняем новое значение units в localStorage
+    localStorage.setItem('units', units);
+
+    // Вызываем функцию обновления данных о погоде с новыми единицами измерения
+    yourPosition();
+});
 
 
 
@@ -60,6 +74,17 @@ let storage = {
 const poiskDiv = document.querySelector('.poisk');
 const poisk = document.querySelector('.poisk-input');
 const dropmenupoisk = document.querySelector('.dropmeu-poisk');
+
+
+
+    // Проверяем наличие значения 'units' в localStorage
+    
+
+    // Далее ваш код инициализации приложения, например, вызов функции yourPosition()
+    
+
+
+// Вызываем функцию инициализации приложения при загрузке страницы
 
 
 const coordsTown = {
@@ -89,7 +114,7 @@ async function getTownDate(latitude, longitude) {
     }
 }
 function coords(latitude, longitude) {
-    const link = `https://api.openweathermap.org/data/3.0/onecall?lat=${latitude}&lon=${longitude}&units=metric&appid=${apikey}`;
+    const link = `https://api.openweathermap.org/data/3.0/onecall?lat=${latitude}&lon=${longitude}&units=${units}&appid=${apikey}`;
     console.log(link);
     updateSwiper(link);
     weatherDay(link);
@@ -177,7 +202,7 @@ function apitest(event) {
 
     apikey = key;
 
-    fetch(`https://api.openweathermap.org/data/3.0/onecall?lat=52.0944791&lon=23.759782&units=metric&appid=${apikey}`)
+    fetch(`https://api.openweathermap.org/data/3.0/onecall?lat=52.0944791&lon=23.759782&units=${units}&appid=${apikey}`)
         .then(response => {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
@@ -254,7 +279,7 @@ function failure() {
 //       console.error('An error occurred:', error);
 //     });
     
-// }
+// 
 
 
 function yourPosition() {
@@ -287,14 +312,6 @@ res.addEventListener('click', () => {
   localStorage.removeItem('api-key');
   location.reload();
 });
-
-
-const slider = document.querySelector('.slider');
-
-slider.addEventListener('click', () => {
-    slider.classList.toggle('far');
-});
-
 
 
 
