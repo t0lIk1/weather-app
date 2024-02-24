@@ -40,7 +40,7 @@ function updateAllInfo() {
     temp.innerHTML = Math.round((storage.temp * 9/5) + 32) + '°F';
   } else {
     // Иначе отображаем температуру в градусах Цельсия
-    temp.innerHTML = Math.round(storage.temp) + '°C';
+    temp.innerHTML = Math.round(storage.temp)  + '°C';
   }
 
   let feelsLikes = document.getElementById("feelslike");
@@ -104,7 +104,12 @@ async function weatherDay(url) {
       img.setAttribute('src', `./img/${updateIco(dayData.weather[0].main)}`);
 
       dayText.textContent = `${dayOfWeek}`;
-      temp.textContent = `${Math.round(dayData.temp.day)}°C`
+      if (units === "imperial") {
+        temp.textContent = `${Math.round((dayData.temp.day * 9/5) + 32)}°F`;
+      } else {
+        temp.textContent = `${Math.round(dayData.temp.day)}°C`
+      }
+      
       temp.classList.add('daily-Weather__temp');
 
 
@@ -156,7 +161,12 @@ async function updateSwiper(url) {
       dayText.textContent = translateTime(slideData.dt);
 
       const temp = document.createElement('p');
-      temp.textContent = Math.round(slideData.day) + '°C';
+      if (units === "imperial") {
+        temp.textContent = Math.round((slideData.day * 9/5) + 32) + '°F';
+      } else {
+        temp.textContent = Math.round(slideData.day) + '°C';;
+      }
+      
 
       const img = document.createElement('img');
       img.setAttribute( 'src', `${ './img/' + updateIco(slideData.main)}` );

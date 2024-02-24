@@ -100,7 +100,7 @@ body {
 
 .info-temp::after{
   position: absolute;
-  content: '°C';
+  content: '';
   font-size: 26px;
 }
 .info-feelslike {

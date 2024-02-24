@@ -62,9 +62,9 @@ temperatureToggle.addEventListener('click', () => {
 
     // Сохраняем новое значение units в localStorage
     localStorage.setItem('units', units);
+    yourPosition();
 
     // Вызываем функцию обновления данных о погоде с новыми единицами измерения
-    yourPosition();
 });
 
 
