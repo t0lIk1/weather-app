@@ -51,22 +51,22 @@ let storage = {
     },
 };
 
-let units = localStorage.getItem('units')||'imperial';;
+let units = localStorage.getItem('units')||'metric';;
+
 const temperatureToggle = document.querySelector('.button-togle');
 temperatureToggle.addEventListener('click', () => {
+    
     if (units === 'metric') {
         units = 'imperial';
     } else {
         units = 'metric';
     }
-
-    // Сохраняем новое значение units в localStorage
     localStorage.setItem('units', units);
-    yourPosition();
+    // Сохраняем новое значение units в localStorage
+    preventDefault();
 
     // Вызываем функцию обновления данных о погоде с новыми единицами измерения
 });
-
 
 
 
